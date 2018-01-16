@@ -18,12 +18,13 @@ public class CharacterController : MonoBehaviour {
 
     //Character Component
     Rigidbody2D rb;
+    Animator anim;
     
     //On Awake get get the Characters Rigidbody Component
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -42,7 +43,26 @@ public class CharacterController : MonoBehaviour {
         //Horizontal Movement
         float moveHoz = (Input.GetAxis("Horizontal") * moveSpeed) * Time.deltaTime;
         transform.Translate(moveHoz, 0, 0);
+        if (moveHoz > 0 && !isInAir)
+        {
+            Debug.Log("IS WALKING");
+            
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isRunning", true);
+            transform.localScale *= -1;
+        }
+        if (moveHoz == 0 && !isInAir)
+        {
+            Debug.Log("IS IDLE");
 
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isRunning", false);
+        }
+        if (moveHoz < 0 && !isInAir)
+        {
+
+            transform.position.Scale == new transform.position.Scale * -1;
+        }      
 
     }
 
@@ -74,6 +94,11 @@ public class CharacterController : MonoBehaviour {
         }
 
         
+    }
+
+    void MovementAnimate()
+    {
+
     }
 
 
