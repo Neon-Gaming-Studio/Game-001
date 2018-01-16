@@ -8,19 +8,24 @@ public class CharacterController : MonoBehaviour {
     //Movement
     public float moveSpeed;
 
+    private float moveHoz;
 
+    bool isFacingRight = true;
+
+    [Header("Character Jumping")]
+    [Header("")]
     //Jumping
     [Range(0,10)]
     public float jumpVelocity;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
-    public bool isInAir = false;
+    private bool isInAir = false;
 
     //Character Component
     Rigidbody2D rb;
     Animator anim;
     
-    //On Awake get get the Characters Rigidbody Component
+    //On Awake get get Component References
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,7 +33,7 @@ public class CharacterController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update ()
+    void FixedUpdate ()
     {
 
         Movemment();
@@ -36,14 +41,27 @@ public class CharacterController : MonoBehaviour {
 
     }
 
-
+    //General Character Movement
     void Movemment()
     {
 
         //Horizontal Movement
-        float moveHoz = (Input.GetAxis("Horizontal") * moveSpeed) * Time.deltaTime;
+        moveHoz = (Input.GetAxis("Horizontal") * moveSpeed) * Time.deltaTime;
         transform.Translate(moveHoz, 0, 0);
-        if (moveHoz > 0 && !isInAir)
+
+        //Facing Direction
+        if (moveHoz > 0 && !isFacingRight)
+        {
+            Flip();
+        }
+        else if (moveHoz < 0 && isFacingRight)
+        {
+            Flip();
+        }
+        
+
+        //Animation: WALKING
+        if (moveHoz != 0 && !isInAir)
         {
             Debug.Log("IS WALKING");
             
@@ -51,22 +69,20 @@ public class CharacterController : MonoBehaviour {
             anim.SetBool("isRunning", true);
             
         }
+
+
+        //Animation: IDLE
         if (moveHoz == 0 && !isInAir)
         {
-            Debug.Log("IS IDLE");
-
             anim.SetBool("isIdle", true);
             anim.SetBool("isRunning", false);
         }
-        if (moveHoz < 0 && !isInAir)
-        {
-
-            Debug.Log("Moving Left");
-           
-        }      
+        
+        
 
     }
 
+    //Jumping
     void Jump()
     {
         //Jumping Movement 
@@ -97,11 +113,17 @@ public class CharacterController : MonoBehaviour {
         
     }
 
-    void MovementAnimate()
+    
+    //Flip Facing Direction
+    void Flip()
     {
+        isFacingRight = !isFacingRight;
+        Vector3 theScale = transform.localScale;
+
+        theScale.x *= -1;
+        transform.localScale = theScale;
 
     }
-
 
 
 }
