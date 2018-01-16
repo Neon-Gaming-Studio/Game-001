@@ -49,7 +49,7 @@ public class CharacterController : MonoBehaviour {
             
             anim.SetBool("isIdle", false);
             anim.SetBool("isRunning", true);
-            transform.localScale *= -1;
+            
         }
         if (moveHoz == 0 && !isInAir)
         {
@@ -61,7 +61,8 @@ public class CharacterController : MonoBehaviour {
         if (moveHoz < 0 && !isInAir)
         {
 
-            transform.position.Scale == new transform.position.Scale * -1;
+            Debug.Log("Moving Left");
+           
         }      
 
     }
