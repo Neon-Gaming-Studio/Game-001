@@ -209,6 +209,15 @@ Prefab:
       propertyPath: m_BodyType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114550816638658428, guid: 2df2153dc2b2daf41838b4bd54977bd5,
+        type: 2}
+      propertyPath: jumpVelocity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849554153429550, guid: 2df2153dc2b2daf41838b4bd54977bd5, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2df2153dc2b2daf41838b4bd54977bd5, type: 2}
   m_IsPrefabParent: 0
