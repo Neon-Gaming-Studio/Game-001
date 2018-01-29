@@ -20,7 +20,9 @@ public class GunController : MonoBehaviour {
 
         input = new Vector2(horizAxis, vertAxis);
 
-        if (horizAxis > 0 && vertAxis == 0)  { GunRight();       }
+        Debug.Log(input);
+
+        /* if (horizAxis > 0 && vertAxis == 0)  { GunRight();       }
         if (horizAxis > 0 && vertAxis > 0)   { GunTopRight();    }
         if (horizAxis > 0 && vertAxis < 0)   { GunBottomRight(); }
 
@@ -30,7 +32,7 @@ public class GunController : MonoBehaviour {
 
         if (horizAxis == 0 && vertAxis > 0)  { GunTop();         }
         if (horizAxis == 0 && vertAxis < 0)  { GunBottom();      }
-
+        */
         
 
 
