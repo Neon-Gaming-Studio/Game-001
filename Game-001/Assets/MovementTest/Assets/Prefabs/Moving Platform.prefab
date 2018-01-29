@@ -118,13 +118,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91ef7e8e5786b646bcc94d00bdf6532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionMask: {}
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 512
   collider: {fileID: 0}
   horizontalRayCount: 4
   verticalRayCount: 4
   horizontalRaySpacing: 0
   verticalRaySpacing: 0
-  passengerMask: {}
+  passengerMask:
+    serializedVersion: 2
+    m_Bits: 256
   localWaypoints: []
   cyclic: 0
   speed: 3
