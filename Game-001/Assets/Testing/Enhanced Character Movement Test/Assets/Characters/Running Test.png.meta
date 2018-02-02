@@ -1,31 +1,29 @@
 fileFormatVersion: 2
-guid: 87685386eb123d740913d5f64f63f753
-timeCreated: 1516193226
+guid: f620d1ed3a74a3e47a54e7ce51f52582
+timeCreated: 1517530614
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Alucard_Jumping_0
-    21300002: Alucard_Jumping_1
-    21300004: Alucard_Jumping_2
-    21300006: Alucard_Jumping_3
-    21300008: Alucard_Jumping_4
-    21300010: Alucard_Jumping_5
-    21300012: Alucard_Jumping_6
-    21300014: Alucard_Jumping_7
-    21300016: Alucard_Jumping_8
-    21300018: Alucard_Jumping_9
-    21300020: Alucard_Jumping_10
-    21300022: Alucard_Jumping_11
-    21300024: Alucard_Jumping_12
-    21300026: Alucard_Jumping_13
-    21300028: Alucard_Jumping_14
-    21300030: Alucard_Jumping_15
-    21300032: Alucard_Jumping_16
-    21300034: Alucard_Jumping_17
-    21300036: Alucard_Jumping_18
-    21300038: Alucard_Jumping_19
-    21300040: Alucard_Jumping_20
-    21300042: Alucard_Jumping_21
+    21300000: Running Test_0
+    21300002: Running Test_1
+    21300004: Running Test_2
+    21300006: Running Test_3
+    21300008: Running Test_4
+    21300010: Running Test_5
+    21300012: Running Test_6
+    21300014: Running Test_7
+    21300016: Running Test_8
+    21300018: Running Test_9
+    21300020: Running Test_10
+    21300022: Running Test_11
+    21300024: Running Test_12
+    21300026: Running Test_13
+    21300028: Running Test_14
+    21300030: Running Test_15
+    21300032: Running Test_16
+    21300034: Running Test_17
+    21300036: Running Test_18
+    21300038: Running Test_19
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -57,12 +55,12 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 0
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 30
+  spritePixelsToUnits: 10
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -92,286 +90,195 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Alucard_Jumping_0
+      name: Running Test_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Alucard_Jumping_1
+      name: Running Test_1
       rect:
         serializedVersion: 2
-        x: 65
+        x: 75
         y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Alucard_Jumping_2
+      name: Running Test_2
       rect:
         serializedVersion: 2
-        x: 130
+        x: 150
         y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Alucard_Jumping_3
+      name: Running Test_3
       rect:
         serializedVersion: 2
-        x: 195
+        x: 225
         y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Alucard_Jumping_4
+      name: Running Test_4
       rect:
         serializedVersion: 2
-        x: 260
+        x: 300
         y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Alucard_Jumping_5
+      name: Running Test_5
       rect:
         serializedVersion: 2
-        x: 325
+        x: 375
         y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Alucard_Jumping_6
+      name: Running Test_6
       rect:
         serializedVersion: 2
-        x: 390
+        x: 450
         y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Alucard_Jumping_7
+      name: Running Test_7
       rect:
         serializedVersion: 2
-        x: 455
+        x: 525
         y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Alucard_Jumping_8
+      name: Running Test_8
       rect:
         serializedVersion: 2
-        x: 520
+        x: 600
         y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Alucard_Jumping_9
+      name: Running Test_9
       rect:
         serializedVersion: 2
-        x: 585
+        x: 675
         y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Alucard_Jumping_10
+      name: Running Test_10
       rect:
         serializedVersion: 2
-        x: 650
+        x: 750
         y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Alucard_Jumping_11
+      name: Running Test_11
       rect:
         serializedVersion: 2
-        x: 715
+        x: 825
         y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Alucard_Jumping_12
+      name: Running Test_12
       rect:
         serializedVersion: 2
-        x: 780
+        x: 900
         y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Alucard_Jumping_13
-      rect:
-        serializedVersion: 2
-        x: 845
-        y: 0
-        width: 65
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Alucard_Jumping_14
-      rect:
-        serializedVersion: 2
-        x: 910
-        y: 0
-        width: 65
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Alucard_Jumping_15
+      name: Running Test_13
       rect:
         serializedVersion: 2
         x: 975
         y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Alucard_Jumping_16
+      name: Running Test_14
       rect:
         serializedVersion: 2
-        x: 1040
+        x: 1050
         y: 0
-        width: 65
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Alucard_Jumping_17
-      rect:
-        serializedVersion: 2
-        x: 1105
-        y: 0
-        width: 65
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Alucard_Jumping_18
-      rect:
-        serializedVersion: 2
-        x: 1170
-        y: 0
-        width: 65
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Alucard_Jumping_19
-      rect:
-        serializedVersion: 2
-        x: 1235
-        y: 0
-        width: 65
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Alucard_Jumping_20
-      rect:
-        serializedVersion: 2
-        x: 1300
-        y: 0
-        width: 65
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Alucard_Jumping_21
-      rect:
-        serializedVersion: 2
-        x: 1365
-        y: 0
-        width: 65
-        height: 84
+        width: 75
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

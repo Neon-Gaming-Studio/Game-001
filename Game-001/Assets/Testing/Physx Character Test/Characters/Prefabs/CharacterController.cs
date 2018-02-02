@@ -46,7 +46,7 @@ public class CharacterController : MonoBehaviour {
     {
 
         //Horizontal Movement
-        moveHoz = (Input.GetAxis("Horizontal") * moveSpeed) * Time.deltaTime;
+        moveHoz = (Input.GetAxis("LThumbX") * moveSpeed) * Time.deltaTime;
         transform.Translate(moveHoz, 0, 0);
 
         //Facing Direction
@@ -86,7 +86,7 @@ public class CharacterController : MonoBehaviour {
     void Jump()
     {
         //Jumping Movement 
-        if (Input.GetButtonDown("Jump") && !isInAir)
+        if (Input.GetButtonDown("BButton") && !isInAir)
         {
             isInAir = true;
             GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpVelocity;

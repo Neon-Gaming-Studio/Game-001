@@ -6,7 +6,7 @@ using UnityEngine;
 public class Controller2D : RaycastController {
     
     float maxSlopeAngle = 80;
-            
+
     public CollisionInfo collisions;
     [HideInInspector] public Vector2 playerInput;
 
@@ -31,11 +31,9 @@ public class Controller2D : RaycastController {
             DescendSlope(ref moveAmount);
         }
 
-
         if (moveAmount.x != 0) {
             collisions.faceDir = (int)Mathf.Sign(moveAmount.x);
-        }
-
+        }   
 
         HorizontalCollisions(ref moveAmount);
     
