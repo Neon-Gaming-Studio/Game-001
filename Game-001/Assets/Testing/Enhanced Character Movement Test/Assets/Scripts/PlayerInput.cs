@@ -13,11 +13,11 @@ BUTTONS
 
  B = A (XBOX)                      Joystick Button 0      Joystick Button 16            Jump                          BButton                   SPACE
  A = B (XBOX)                      Joystick Button 1      Joystick Button 17            Roll                          AButton                   C
- Y = X (XBOX)                      Joystick Button 2      Joystick Button 19            Shoot                         YButton                   R Mouse
+ Y = X (XBOX)                      Joystick Button 2      Joystick Button 19            Shoot                         YButton                   L Mouse
  X = Y (XBOX)                      Joystick Button 3      Joystick Button 19            Change Weapon                 XButton                   Q
  
  Left Shoulder                     Joystick Button 4      Joystick Button 13            ****                          LShoulder                 ****
- Right Shoulder                    Joystick Button 5      Joystick Button 14            Grenade                       RShoulder                 L Mouse
+ Right Shoulder                    Joystick Button 5      Joystick Button 14            Grenade                       RShoulder                 R Mouse
   
  Select                            Joystick Button 6      Joystick Button 10            Map                           Select                    TAB            
  Start                             Joystick Button 7      Joystick Button 9             Menu                          Start                     Enter
@@ -43,7 +43,7 @@ AXISES
 
 //This Script controls the Player Input from the Action Mapping Above
 
-//Requires a Player Script to be attached to the same Object. Adds a Player Script is there is not one.
+//Requires a Player Script to be attached to the same Object. Adds a Player Script if there is not one.
 //Also ensure that it cannot be removed if there is still a player Script attach to the same object.
 [RequireComponent(typeof(Player))]
 
@@ -51,12 +51,14 @@ public class PlayerInput : MonoBehaviour {
 
     Player player;
     Animator animator;
+    Shooting shooting;
     bool isFacingRight = true;
 
     //Get a reference to the Player Script
     void Start () {
         player = GetComponent<Player>();
         animator = GetComponent<Animator>();
+        shooting = GetComponent<Shooting>();
     }
 	
 	
@@ -67,30 +69,17 @@ public class PlayerInput : MonoBehaviour {
 		Vector2 directionalInput =  new Vector2(Input.GetAxisRaw("LThumbX"), Input.GetAxisRaw("LThumbY"));
         player.SetDirectionalInput(directionalInput);
 
-        if (directionalInput != Vector2.zero)
-        {
-           animator.SetBool("isRunning", true);
-           animator.SetBool("isIdle", false);
-
-        }
-        
-         if (directionalInput == Vector2.zero)
-        {
-            animator.SetBool("isRunning", false);
-            animator.SetBool("isIdle", true);
-        }
-
-        
+       
         //Picks up the A button on the XBOX Controller or B button on the Switch Controller
         //Used for Jumping in the Player Controller Script   
         if (Input.GetButtonDown("BButton")) { //On Press Down
             player.OnJumpInputDown();
-            Debug.Log("Xbox A pressed!");
+            //Debug.Log("Xbox A pressed!");
         }
 
         if (Input.GetButtonUp("BButton")) { //On Lift Up
             player.OnJumpInputUp();
-            Debug.Log("Xbox A released!");
+            //Debug.Log("Xbox A released!");
         }
 
         if (Input.GetButtonDown("AButton"))
@@ -98,14 +87,15 @@ public class PlayerInput : MonoBehaviour {
             Debug.Log("Xbox B pressed!");
         }
 
-        if (Input.GetButtonDown("YButton"))
+        if (Input.GetButton("YButton"))
         {
-            Debug.Log("Xbox X pressed!");
+            //Debug.Log("Xbox X pressed!");
+            shooting.Fire();
         }
 
         if (Input.GetButtonDown("XButton"))
         {
-            Debug.Log("Xbox Y pressed!");
+            //Debug.Log("Xbox Y pressed!");
         }
 
 

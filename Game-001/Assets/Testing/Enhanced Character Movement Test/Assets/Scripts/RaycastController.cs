@@ -11,6 +11,8 @@ public class RaycastController : MonoBehaviour {
     [HideInInspector] public BoxCollider2D collider;
     public RaycastOrigins raycastOrigins;
 
+
+    //Ray Inset from the edge of the Collider
     public const float skinWidth = 0.015f;
 
     const float DistBetweenRays = 0.25f;
@@ -20,7 +22,7 @@ public class RaycastController : MonoBehaviour {
     [HideInInspector] public float verticalRaySpacing;
 
 
-
+    //This Script Creates the Raycasts used to calculate the collisions with the Box Collider
 
     //START Methods
     public virtual void Awake() {

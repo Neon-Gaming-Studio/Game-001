@@ -28,17 +28,20 @@ public class Player : MonoBehaviour {
     float maxJumpVelocity;
     float minJumpVelocity;
     
-    Vector3 velocity;
+    public Vector3 velocity;
     float velocityXSmoothing;
 
     Vector2 directionalInput;
-
+    
     Controller2D controller;
+    PlayerAnimController animConntroller;
+
     public bool enableWallClimb = false;
 
     void Start() {
 
         controller = GetComponent<Controller2D>();
+        animConntroller = GetComponent<PlayerAnimController>();
 
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -54,13 +57,14 @@ public class Player : MonoBehaviour {
         {
             HandleWallSliding();
         }
-
         
-
+        //animConntroller.RunningAction(Mathf.Abs(velocity.x) / moveSpeed);
+        //animConntroller.Jump(velocity.y);  
         controller.Move(velocity * Time.deltaTime, directionalInput);
 
         if (controller.collisions.above || controller.collisions.below)
         {
+           
             if (controller.collisions.slidingDownMaxSlope)
             {
                 velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
@@ -70,6 +74,7 @@ public class Player : MonoBehaviour {
                 velocity.y = 0;
             }
         }
+      
     }
 
 
@@ -80,6 +85,7 @@ public class Player : MonoBehaviour {
 
 
     public void OnJumpInputDown() {
+        
         if (wallSliding) {
             if (wallDirX == directionalInput.x) {
                 velocity.x = -wallDirX * wallJumpClimb.x;
@@ -96,6 +102,7 @@ public class Player : MonoBehaviour {
 
         }
         if (controller.collisions.below)
+        
         {
             if (controller.collisions.slidingDownMaxSlope)
             {
@@ -116,6 +123,7 @@ public class Player : MonoBehaviour {
     public void OnJumpInputUp() {
         if (velocity.y > minJumpVelocity) {
             velocity.y = minJumpVelocity;
+            
         }
     }
 

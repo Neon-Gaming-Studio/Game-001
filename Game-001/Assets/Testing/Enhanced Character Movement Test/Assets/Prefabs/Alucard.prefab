@@ -23,8 +23,10 @@ GameObject:
   - component: {fileID: 114792234674528694}
   - component: {fileID: 114625167133790806}
   - component: {fileID: 114604789792194726}
+  - component: {fileID: 95711748357222404}
+  - component: {fileID: 114714443518063132}
   m_Layer: 8
-  m_Name: Player 1
+  m_Name: Alucard
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1710726592362204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.61, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4280501093473940}
@@ -66,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1087238356146328}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4071464205609406}
@@ -85,7 +87,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0}
+  m_Offset: {x: 0.04763913, y: -0.022441506}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -96,8 +98,25 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 2.524312, y: 4.8151255}
   m_EdgeRadius: 0
+--- !u!95 &95711748357222404
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1087238356146328}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6a60595279e318a4ebe9b170d5bd11db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114604789792194726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04fccc41bfd733841a61c5087e381837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJumpHeight: 4
+  maxJumpHeight: 6
   minJumpHeight: 1
   timeToJumpApex: 0.4
   moveSpeed: 10
@@ -129,7 +148,19 @@ MonoBehaviour:
   wallJumpOff: {x: 8.5, y: 7}
   wallLeapOff: {x: 18, y: 17}
   wallStickTime: 1
+  velocity: {x: 0, y: 0, z: 0}
   enableWallClimb: 0
+--- !u!114 &114714443518063132
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1087238356146328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523e474af3dfa0f478a9c15a297d90c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114792234674528694
 MonoBehaviour:
   m_ObjectHideFlags: 1
