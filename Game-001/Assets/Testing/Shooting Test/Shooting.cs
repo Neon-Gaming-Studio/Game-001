@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour {
 
-    public GameObject projectile;
-
     public void Fire()
     {
 
