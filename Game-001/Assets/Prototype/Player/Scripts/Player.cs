@@ -6,42 +6,38 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+    #region VARIABLES
+
+    [Header("Movement Variables")]
+    public float moveSpeed;
+    float gravity;
+    Vector3 velocity;
+    float velocityXSmoothing;
+    Vector2 directionalInput;
+
+    [Header("Jumping Variables")]
     public float maxJumpHeight = 4;
     public float minJumpHeight = 1;
     public float timeToJumpApex = 0.4f;
-    public float moveSpeed;
-
     float accelerationTimeAirborne = 0.2f;
     float accelerationTimeGrounded = 0.1f;
-
-    public float wallSlideSpeedMax = 3;
-    public Vector2 wallJumpClimb;
-    public Vector2 wallJumpOff;
-    public Vector2 wallLeapOff;
-
-    public float wallStickTime;
-    float timeToWallUnStick;
-    bool wallSliding;
-    int wallDirX;
-    
-    float gravity;
     float maxJumpVelocity;
     float minJumpVelocity;
     
-    public Vector3 velocity;
-    float velocityXSmoothing;
-
-    Vector2 directionalInput;
-    
+    //Component References 
     Controller2D controller;
-    PlayerAnimController animConntroller;
+    PlayerAnimController animController;
 
-    public bool enableWallClimb = false;
+    //public bool enableWallClimb = false;
+
+    #endregion
+
+    #region START METHODS
 
     void Start() {
 
         controller = GetComponent<Controller2D>();
-        animConntroller = GetComponent<PlayerAnimController>();
+        animController = GetComponent<PlayerAnimController>();
 
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -49,15 +45,14 @@ public class Player : MonoBehaviour {
 
     }
 
+    #endregion
+
+    #region UPDATE METHOD
+
     void Update() {
 
         CalculateVelocity();
 
-        if (enableWallClimb)
-        {
-            HandleWallSliding();
-        }
-        
         //animConntroller.RunningAction(Mathf.Abs(velocity.x) / moveSpeed);
         //animConntroller.Jump(velocity.y);  
         controller.Move(velocity * Time.deltaTime, directionalInput);
@@ -77,30 +72,14 @@ public class Player : MonoBehaviour {
       
     }
 
+    #endregion
 
-
-    public void SetDirectionalInput(Vector2 input) {
-        directionalInput = input;
-    }
+    #region JUMP METHODS
 
 
     public void OnJumpInputDown() {
         
-        if (wallSliding) {
-            if (wallDirX == directionalInput.x) {
-                velocity.x = -wallDirX * wallJumpClimb.x;
-                velocity.y = wallJumpClimb.y;
-            }
-            else if (directionalInput.x == 0) {
-                velocity.x = -wallDirX * wallJumpOff.x;
-                velocity.y = wallJumpOff.y;
-            }
-            else {
-                velocity.x = -wallDirX * wallLeapOff.y;
-                velocity.y = wallLeapOff.y;
-            }
-
-        }
+       
         if (controller.collisions.below)
         
         {
@@ -119,7 +98,6 @@ public class Player : MonoBehaviour {
         }
     }
 
-
     public void OnJumpInputUp() {
         if (velocity.y > minJumpVelocity) {
             velocity.y = minJumpVelocity;
@@ -127,33 +105,13 @@ public class Player : MonoBehaviour {
         }
     }
 
-    
+    #endregion
 
-    void HandleWallSliding() {
-        wallDirX = (controller.collisions.left) ? -1 : 1;
-        wallSliding = false;
+    #region UTILITY METHODS
 
-        if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0) {
-            wallSliding = true;
-            if (velocity.y < -wallSlideSpeedMax) {
-                velocity.y = -wallSlideSpeedMax;
-            }
-            if (timeToWallUnStick > 0) {
-                velocityXSmoothing = 0;
-                velocity.x = 0;
-                if (directionalInput.x != wallDirX && directionalInput.x != 0) {
-                    timeToWallUnStick -= Time.deltaTime;
-                }
-                else {
-                    timeToWallUnStick = wallStickTime;
-                }
-
-            }
-            else {
-                timeToWallUnStick = wallStickTime;
-            }
-        }
-
+    public void SetDirectionalInput(Vector2 input)
+    {
+        directionalInput = input;
     }
 
     void CalculateVelocity() {
@@ -161,4 +119,6 @@ public class Player : MonoBehaviour {
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
         velocity.y += gravity * Time.deltaTime;
     }
+    #endregion
+
 }

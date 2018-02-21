@@ -87,7 +87,7 @@ public class PlayerInput : MonoBehaviour {
             Debug.Log("Xbox B pressed!");
         }
 
-        if (Input.GetButton("YButton"))
+        if (Input.GetButtonDown("YButton"))
         {
             //Debug.Log("Xbox X pressed!");
             shooting.Fire();

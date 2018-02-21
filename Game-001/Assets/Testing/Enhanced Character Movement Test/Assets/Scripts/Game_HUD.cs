@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System;
 
 public class Game_HUD : MonoBehaviour {
-
+    /*
     Controller2D controller;
     Animator animator;
     public Player player;
@@ -59,8 +59,8 @@ public class Game_HUD : MonoBehaviour {
         colAbove.text = controller.collisions.above.ToString();
 
 
-        yValue.text = (Math.Sign(player.velocity.y)).ToString();
-    }
+       // yValue.text = (Math.Sign(player.velocity.y)).ToString();
+    }*/
 
 }
 

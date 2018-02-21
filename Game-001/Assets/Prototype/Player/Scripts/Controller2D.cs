@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Controller2D : RaycastController {
     
+    //The Controller Script derives from the RaycastController 
+
     float maxSlopeAngle = 80;
 
     public CollisionInfo collisions;
@@ -22,7 +24,7 @@ public class Controller2D : RaycastController {
 
     //MOVE Method
     public void Move(Vector2 moveAmount, Vector2 input, bool standingOnPlatform = false) {
-        UpdateRaycastOrigins();
+        UpdateRaycastOrigins(); //Updates the Raycast Origins of the player box collider bounds in the RaycastController Script 
         collisions.Reset();
         collisions.moveAmountOld = moveAmount;
         playerInput = input;
