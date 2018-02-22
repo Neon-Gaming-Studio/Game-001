@@ -34,10 +34,10 @@ public class Player : MonoBehaviour {
 
     #region START METHODS
 
-    void Start() {
+    void Start()
+    {
 
         controller = GetComponent<Controller2D>();
-        animController = GetComponent<PlayerAnimController>();
 
         gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
@@ -49,13 +49,14 @@ public class Player : MonoBehaviour {
 
     #region UPDATE METHOD
 
-    void Update() {
-
+    void Update()
+    {
+        //Each Update it calculates the velocity of the player
         CalculateVelocity();
 
-        //animConntroller.RunningAction(Mathf.Abs(velocity.x) / moveSpeed);
-        //animConntroller.Jump(velocity.y);  
+        //Calls the Move Method on the Controller2D script to move the Character 
         controller.Move(velocity * Time.deltaTime, directionalInput);
+
 
         if (controller.collisions.above || controller.collisions.below)
         {
@@ -109,14 +110,22 @@ public class Player : MonoBehaviour {
 
     #region UTILITY METHODS
 
+    //This takes the Movement input from the PlayerInput script which is then manipulated by the CalculateVelocity method and passed into the Move method
+    //on the Controlled2D script.
     public void SetDirectionalInput(Vector2 input)
     {
         directionalInput = input;
     }
 
-    void CalculateVelocity() {
+
+    //Called by the Update Method to adjust the velocity of the Player movement
+    void CalculateVelocity()
+    {
+        //Adds a smooth calculation to the horizontal movement 
         float targetVelocityX = directionalInput.x * moveSpeed;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+
+        //Calculates Gravity against the player
         velocity.y += gravity * Time.deltaTime;
     }
     #endregion

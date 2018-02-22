@@ -2,56 +2,82 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//The Controller Script derives from the RaycastController 
+//It used used to Move the PLAYER and calculate the COLLISIONS
+public class Controller2D : RaycastController
+{
 
-public class Controller2D : RaycastController {
+    #region VARIABLES
     
-    //The Controller Script derives from the RaycastController 
-
+    //Maximun Angle the Player can walk up
     float maxSlopeAngle = 80;
 
+    //Component References
     public CollisionInfo collisions;
+
+    //Input value
     [HideInInspector] public Vector2 playerInput;
 
-     public override void Start() {
+    #endregion
+
+
+    public override void Start()
+    {
         base.Start();
         collisions.faceDir = 1;
     }
 
-    public void Move(Vector2 moveAmount, bool standingOnPlatform) {
+
+
+    public void Move(Vector2 moveAmount, bool standingOnPlatform)
+    {
         Move(moveAmount, Vector2.zero, standingOnPlatform);
     }
     
 
+
+
     //MOVE Method
-    public void Move(Vector2 moveAmount, Vector2 input, bool standingOnPlatform = false) {
+    public void Move(Vector2 moveAmount, Vector2 input, bool standingOnPlatform = false)
+    {
         UpdateRaycastOrigins(); //Updates the Raycast Origins of the player box collider bounds in the RaycastController Script 
         collisions.Reset();
         collisions.moveAmountOld = moveAmount;
         playerInput = input;
 
-        if (moveAmount.y < 0)        {
+        if (moveAmount.y < 0)
+        {
             DescendSlope(ref moveAmount);
         }
 
-        if (moveAmount.x != 0) {
+        if (moveAmount.x != 0)
+        {
             collisions.faceDir = (int)Mathf.Sign(moveAmount.x);
-        }   
+        }
+
 
         HorizontalCollisions(ref moveAmount);
     
 
-        if (moveAmount.y != 0) {
+        if (moveAmount.y != 0)
+        {
             VerticalCollisions(ref moveAmount);
         }
 
-        transform.Translate(moveAmount);
-
-
-        if (standingOnPlatform) {
+        if (standingOnPlatform)
+        {
             collisions.below = true;
         }
+
+        //============MOVES THE PLAYER==============//
+        transform.Translate(moveAmount);
+        //============MOVES THE PLAYER==============//
     }
 
+
+
+    #region COLLISIONS
+    
     //Horizontal
     void HorizontalCollisions(ref Vector2 moveAmount)
     {
@@ -117,34 +143,47 @@ public class Controller2D : RaycastController {
     }
 
 
-    //COLLISION Methods
-    //Vertical
-    void VerticalCollisions(ref Vector2 moveAmount) {
-        float directionY = Mathf.Sign(moveAmount.y);
-        float rayLength = Mathf.Abs(moveAmount.y) + skinWidth;
-        for (int i = 0; i < verticalRayCount; i++) {
-            Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft;
-            rayOrigin += Vector2.right * (verticalRaySpacing * i + moveAmount.x);
+    //VERTICAL COLLISIONS - Both above and below the player 
+    //Called from the MOVE method
+    void VerticalCollisions(ref Vector2 moveAmount)
+    {
 
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
+        float directionY = Mathf.Sign(moveAmount.y); //Direction of the Y movement (DOWN = -1 / UP = 1)
+        float rayLength = Mathf.Abs(moveAmount.y) + skinWidth; //Length of the Ray
+        
+        for (int i = 0; i < verticalRayCount; i++)
+        {
+            Vector2 rayOrigin = (directionY == -1) ? raycastOrigins.bottomLeft : raycastOrigins.topLeft; //Changes the Rays so if the player is moving up they are at the top and vice verse
+            rayOrigin += Vector2.right * (verticalRaySpacing * i + moveAmount.x); //Updates the Ray Origin for each ray
 
-            Debug.DrawRay(rayOrigin, Vector2.up * directionY, Color.red);
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask); //Dreates a RayCast from the Ray Origin and returns if it hits anything
 
-            if (hit) {
-                if (hit.collider.tag == "Through") {
+            Debug.DrawRay(rayOrigin, Vector2.up * directionY, Color.red); //Draws the Debug line so that it can be seen in the Scene
+
+            //This IF statement determines what to do if the Raycast hits anything
+            if (hit)
+            {
+                //This IF statement checks the Object hit for the Through TAG
+                //Used for falling through platforms
+                if (hit.collider.tag == "Through")
+                {
                     if (directionY == 1 ||  hit.distance == 0) { continue; }
                     if (collisions.fallingThroughPlatform) { continue; }
-                    if (playerInput.y == -1) {
+                    if (playerInput.y == -1)
+                    {
                         collisions.fallingThroughPlatform = true;
                         Invoke("ResetFallingThroughPlatform",0.5f);
                         continue;
                     }
                 }
 
+                //Stops the movement
                 moveAmount.y = (hit.distance - skinWidth) * directionY;
-                rayLength = hit.distance;
+                rayLength = hit.distance; //Changes the Ray Length to the distance hit so that it does not try to move the object to collision further away
 
-                if (collisions.climbingSlope) {
+
+                if (collisions.climbingSlope)
+                {
                     moveAmount.x = moveAmount.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(moveAmount.x);
                 }
 
@@ -152,15 +191,19 @@ public class Controller2D : RaycastController {
                 collisions.below = directionY == -1; 
             }
         }
-        if (collisions.climbingSlope) {
+
+        if (collisions.climbingSlope)
+        {
             float directionX = Mathf.Sign(moveAmount.x);
             rayLength = Mathf.Abs(moveAmount.x) + skinWidth;
             Vector2 rayOrigin = ((directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight) + Vector2.up * moveAmount.y;
             RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right, rayLength, collisionMask);
 
-            if (hit) {
+            if (hit)
+            {
                 float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
-                if (slopeAngle != collisions.slopeAngle) {
+                if (slopeAngle != collisions.slopeAngle)
+                {
                     moveAmount.x = (hit.distance - skinWidth) * directionX;
                     collisions.slopeAngle = slopeAngle;
                     collisions.slopeNormal = hit.normal;
@@ -171,10 +214,13 @@ public class Controller2D : RaycastController {
     }
 
 
-  
+    #endregion
+
+    #region SLOPE CALCULATIONS
 
     //Climbing Slopes
-    void ClimbSlope(ref Vector2 moveAmount, float slopeAngle, Vector2 slopeNormal) {
+    void ClimbSlope(ref Vector2 moveAmount, float slopeAngle, Vector2 slopeNormal)
+    {
         float moveDistance = Mathf.Abs(moveAmount.x);
         float climboveAmountY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
 
@@ -190,7 +236,7 @@ public class Controller2D : RaycastController {
 
     //Descending Slopes
     void DescendSlope(ref Vector2 moveAmount)
-    {//
+    {
 
         RaycastHit2D maxSlopeHitLeft = Physics2D.Raycast(raycastOrigins.bottomLeft, Vector2.down, Mathf.Abs(moveAmount.y) + skinWidth, collisionMask);
         RaycastHit2D maxSlopeHitRight = Physics2D.Raycast(raycastOrigins.bottomRight, Vector2.down, Mathf.Abs(moveAmount.y) + skinWidth, collisionMask);
@@ -249,14 +295,21 @@ public class Controller2D : RaycastController {
 
     }
 
-    private void ResetFallingThroughPlatform() {
+    #endregion
+
+    #region UTILITY SCRIPTS
+
+    private void ResetFallingThroughPlatform()
+    {
         collisions.fallingThroughPlatform = false;
     }
 
+    #endregion
 
+    #region COLLISION STRUCT
 
-
-    public struct CollisionInfo {
+    public struct CollisionInfo
+    {
 
         public bool above, below;
         public bool left, right;
@@ -287,4 +340,5 @@ public class Controller2D : RaycastController {
             slopeAngle = 0;
         }
     }
+    #endregion
 }

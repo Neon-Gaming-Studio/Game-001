@@ -43,7 +43,10 @@ public class RaycastController : MonoBehaviour
 
     public virtual void Start ()
     {
-        CalculateRaySpacing(); //Calls the Utility Script initially
+        //This is used to initially create the number of Rays and how far they are a part when the script
+        //is initially run. Once this has run the UpdateRaycastOrigins script is ran from the Controller2D 
+        //Script and keeps the locatoisn updated when the player is moved.
+        CalculateRayLocations(); 
     }
 
     #endregion
@@ -51,7 +54,7 @@ public class RaycastController : MonoBehaviour
     #region MAIN METHODS
 
 
-    //This is called from the Controller2D script every time the Player moves as the values will change as the Character moves
+    //This is called from the Controller2D script every time the Player moves as the values will change as the Player moves
     public void UpdateRaycastOrigins()
     {
         
@@ -73,7 +76,8 @@ public class RaycastController : MonoBehaviour
     #region UTILITY METHODS
 
     //This method is used when this script is inialised to calculate the Rayspacing 
-    public void CalculateRaySpacing()
+    //and the number of rays
+    public void CalculateRayLocations()
     {
         Bounds bounds = collider.bounds;
         bounds.Expand(skinWidth * -2);
@@ -81,16 +85,18 @@ public class RaycastController : MonoBehaviour
         float boundsWidth = bounds.size.x;
         float boundsHeight = bounds.size.y;
 
+        //Number of Rays
         horizontalRayCount = Mathf.RoundToInt(boundsHeight / DistBetweenRays);
         verticalRayCount = Mathf.RoundToInt(boundsWidth / DistBetweenRays);
 
+        //Distance between the Rays
         horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
         verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
     }
 
     #endregion
 
-    #region STRUCT
+    #region RAYCAST ORIGINS STRUCT
 
     //Creates a struct to store the Vectors of each of the corners of the bounds box
     public struct RaycastOrigins
