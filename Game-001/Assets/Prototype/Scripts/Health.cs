@@ -8,7 +8,8 @@ public class Health : MonoBehaviour {
     public float currentHealth;
     public float overShield = 0f;
     public Slider healthBar; 
-    
+    public float Damage;
+
     public void Start(){
 
         currentHealth = maxHealth;
@@ -17,19 +18,18 @@ public class Health : MonoBehaviour {
 
     public void Update(){
         
-        healthBar.value = (currentHealth/100);
-
-        Debug.Log(healthBar.value);
-        
-
+        //healthBar.value = (currentHealth/100);
+        //Debug.Log(healthBar.value);    
     }
 
     //*** Take Damage Function ***
     public void TakeDamage(float damageAmount){
         //Need a cue for soundFX for taking damage
-        
+        //Debug.Log(damageAmount);
         currentHealth -= damageAmount;
+        
         //Health bar update
+        healthBar.value = (currentHealth/100);
 
         if (currentHealth <= 0f) {
             currentHealth = 0f;    
