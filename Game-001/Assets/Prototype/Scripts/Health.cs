@@ -7,12 +7,21 @@ public class Health : MonoBehaviour {
     public float maxHealth = 100f;
     public float currentHealth;
     public float overShield = 0f;
-
+    public Slider healthBar; 
     
-    public void start(){
+    public void Start(){
 
         currentHealth = maxHealth;
-    
+        Debug.Log(currentHealth);
+    }
+
+    public void Update(){
+        
+        healthBar.value = (currentHealth/100);
+
+        Debug.Log(healthBar.value);
+        
+
     }
 
     //*** Take Damage Function ***
