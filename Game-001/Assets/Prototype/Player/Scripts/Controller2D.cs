@@ -163,7 +163,7 @@ public class Controller2D : RaycastController
             //This IF statement determines what to do if the Raycast hits anything
             if (hit)
             {
-                //This IF statement checks the Object hit for the Through TAG
+                //This IF statement checks the Object the raycast hit for the Through TAG
                 //Used for falling through platforms
                 if (hit.collider.tag == "Through")
                 {
@@ -179,7 +179,7 @@ public class Controller2D : RaycastController
 
                 //Stops the movement
                 moveAmount.y = (hit.distance - skinWidth) * directionY;
-                rayLength = hit.distance; //Changes the Ray Length to the distance hit so that it does not try to move the object to collision further away
+                rayLength = hit.distance; //Changes the Ray Length to the distance hit so that it does not try to move the object to a collision further away
 
 
                 if (collisions.climbingSlope)
