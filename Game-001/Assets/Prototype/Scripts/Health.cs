@@ -19,7 +19,7 @@ public class Health : MonoBehaviour {
     public void Update(){
         
         //healthBar.value = (currentHealth/100);
-        //Debug.Log(healthBar.value);    
+        // Debug.Log("current health on update: " + currentHealth);    
     }
 
     //*** Take Damage Function ***
@@ -43,19 +43,21 @@ public class Health : MonoBehaviour {
 
     //*** Healing Function ***
     public void HealthPickup(float healAmount){
-        //need a sfx for heath pickup
+            //need a sfx for heath pickup
         if (currentHealth == maxHealth){  //if current health is alreay 100 then no more can be added
-            healAmount = 0f;
-        } else {              
-            if((currentHealth += healAmount) >= maxHealth ){
-                currentHealth = maxHealth;
-                //sound cue for healing
-                //health bar replenish by heal amount
-            } else {
-                currentHealth += healAmount;
-            }
+                healAmount = 0f;    
+        } else if((currentHealth + healAmount) >= maxHealth) {   //if below 100 but pickup makes it go above 100, capped at 100         
+            currentHealth = maxHealth;
+            healthBar.value = (currentHealth/100);
+        } else {
+            currentHealth += healAmount;
+            healthBar.value = (currentHealth/100);
         }
     }
+
+    
+        
+
 
     //*** Max Health Increase Function *** 
     public void MaxHealthIncrease (float increaseAmount) {  
