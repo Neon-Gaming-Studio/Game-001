@@ -73,6 +73,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1602502004222658
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4998344974062542}
+  m_Layer: 8
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1603779216733838
 GameObject:
   m_ObjectHideFlags: 1
@@ -102,6 +117,7 @@ GameObject:
   - component: {fileID: 114693385846900152}
   - component: {fileID: 114871790056496476}
   - component: {fileID: 114299189158112452}
+  - component: {fileID: 114049206473683534}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -165,11 +181,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1295856724467052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.94, y: 0.19, z: 0}
+  m_LocalPosition: {x: 0.75, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4600483618261360}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4363495211270514
 Transform:
@@ -222,6 +238,7 @@ Transform:
   m_LocalPosition: {x: 1.85, y: -0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4998344974062542}
   - {fileID: 4184623737922268}
   m_Father: {fileID: 4363495211270514}
   m_RootOrder: 0
@@ -254,6 +271,19 @@ Transform:
   - {fileID: 4363495211270514}
   - {fileID: 4572526998766250}
   m_Father: {fileID: 4466270359400124}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4998344974062542
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1602502004222658}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.75, y: 0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4600483618261360}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &20966395049560744
@@ -348,6 +378,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114049206473683534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1772711792261696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c7bea12b5fc44da4801f1cdecda9b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  overShield: 0
+  healthBar: {fileID: 0}
+  Damage: 0
 --- !u!114 &114058880582809098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -388,7 +434,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  velocity: {x: 0, y: 0, z: 0}
   maxJumpHeight: 6
   minJumpHeight: 1
   timeToJumpApex: 0.4

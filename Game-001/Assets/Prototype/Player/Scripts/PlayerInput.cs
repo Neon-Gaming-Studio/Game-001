@@ -50,19 +50,17 @@ AXISES
 public class PlayerInput : MonoBehaviour {
 
     Player player;
-    Animator animator;
-    Shooting shooting;
+    //Animator animator;    - This will be used for animation
     bool isFacingRight = true;
 
     //Get a reference to the Player Script
     void Start () {
         player = GetComponent<Player>();
-        animator = GetComponent<Animator>();
-        shooting = GetComponent<Shooting>();
+        //animator = GetComponent<Animator>();     - This will be used for animation
     }
-	
-	
-	void Update () {
+
+
+    void Update () {
 
         //Picks up the Horizontal and Vertical input from the Left Thumbstick of the XBOX Controller or the Thumstick of the Switch
         //Used for character directional Movement in the Player Controller script
@@ -72,12 +70,14 @@ public class PlayerInput : MonoBehaviour {
        
         //Picks up the A button on the XBOX Controller or B button on the Switch Controller
         //Used for Jumping in the Player Controller Script   
-        if (Input.GetButtonDown("BButton")) { //On Press Down
+        if (Input.GetButtonDown("BButton"))
+        { //On Press Down
             player.OnJumpInputDown();
             //Debug.Log("Xbox A pressed!");
         }
 
-        if (Input.GetButtonUp("BButton")) { //On Lift Up
+        if (Input.GetButtonUp("BButton"))
+        { //On Lift Up
             player.OnJumpInputUp();
             //Debug.Log("Xbox A released!");
         }
@@ -89,8 +89,8 @@ public class PlayerInput : MonoBehaviour {
 
         if (Input.GetButtonDown("YButton"))
         {
+
             //Debug.Log("Xbox X pressed!");
-            shooting.Fire();
         }
 
         if (Input.GetButtonDown("XButton"))

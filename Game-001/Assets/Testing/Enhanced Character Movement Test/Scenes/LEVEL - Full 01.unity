@@ -252,6 +252,27 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &127476804 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1597198664300146, guid: d7480c8f4e55d634fa558dbfc1228984,
+    type: 2}
+  m_PrefabInternal: {fileID: 237613038}
+--- !u!114 &127476807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 127476804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 285be3ff168a2094aa036a1361cd68b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireRate: 0
+  damage: 10
+  notToHit:
+    serializedVersion: 2
+    m_Bits: 260
 --- !u!4 &172567472 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4722989048511392, guid: a515090dbbbaa734b8ed9c05659f9726,
@@ -342,6 +363,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114049206473683534, guid: d7480c8f4e55d634fa558dbfc1228984,
+        type: 2}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 78750111}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d7480c8f4e55d634fa558dbfc1228984, type: 2}
   m_IsPrefabParent: 0
@@ -1455,7 +1481,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 839460153}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -1659,27 +1685,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 52df60bfebec593408cb5f4fa3691b82, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1050433395 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1772711792261696, guid: d7480c8f4e55d634fa558dbfc1228984,
-    type: 2}
-  m_PrefabInternal: {fileID: 237613038}
---- !u!114 &1050433402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1050433395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c7bea12b5fc44da4801f1cdecda9b81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  overShield: 0
-  healthBar: {fileID: 78750111}
-  Damage: 0
 --- !u!1001 &1054648502
 Prefab:
   m_ObjectHideFlags: 0
@@ -2238,7 +2243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b0d936d31ec400684bd7aef1c500cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0.1
 --- !u!61 &1839287646
 BoxCollider2D:
   m_ObjectHideFlags: 0
