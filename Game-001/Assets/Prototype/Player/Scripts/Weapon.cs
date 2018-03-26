@@ -48,9 +48,7 @@ public class Weapon : MonoBehaviour {
                 Shoot();
             }
 
-        }
-
-        
+        }               
 	}
 
     void Shoot()

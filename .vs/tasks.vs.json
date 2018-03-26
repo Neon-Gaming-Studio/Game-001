@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "task-Projectile",
+      "appliesTo": "Game-001/Assets/Prototype/Player/Scripts/Projectile.cs",
+      "type": "launch"
+    }
+  ]
+}

@@ -42,6 +42,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1386605828688962
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4448711377094316}
+  m_Layer: 8
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 7707008975528953803, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1597198664300146
 GameObject:
   m_ObjectHideFlags: 1
@@ -51,7 +66,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4600483618261360}
   - component: {fileID: 212486210749412208}
-  - component: {fileID: 114743161004960064}
   m_Layer: 8
   m_Name: Weapon
   m_TagString: Untagged
@@ -159,6 +173,19 @@ Transform:
   m_Father: {fileID: 4684589765354944}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4448711377094316
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1386605828688962}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.94, y: 0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4600483618261360}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4466270359400124
 Transform:
   m_ObjectHideFlags: 1
@@ -195,7 +222,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.85, y: -0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4448711377094316}
   m_Father: {fileID: 4363495211270514}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -205,8 +233,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1280509902608980}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.28, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4019620549357666}
@@ -380,22 +408,10 @@ MonoBehaviour:
   maxJumpHeight: 6
   minJumpHeight: 1
   timeToJumpApex: 0.4
---- !u!114 &114743161004960064
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1597198664300146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 285be3ff168a2094aa036a1361cd68b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireRate: 0
-  damage: 10
-  notToHit:
-    serializedVersion: 2
-    m_Bits: 260
+  shootingDirection: {x: 0, y: 0}
+  fireRate: 0.2
+  projectilePrefab: {fileID: 1046085552704990, guid: 902c9dc3819d45541b2dd5f6e1335246,
+    type: 2}
 --- !u!114 &114871790056496476
 MonoBehaviour:
   m_ObjectHideFlags: 1

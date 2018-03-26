@@ -29,10 +29,10 @@ AXISES
 
  Left Thumbstick X                 X Axis                 X Axis                        Movement                      LThumbX                   A / D
  Left Thumbstick Y                 Y Axis                 Y Axis                        Movement                      LThumbY                   W / S
- Right Thumbstick X                4th Axis               3rd Axis                      Movement                      RThumbX                   ****
- Right Thumbstick Y                5th Axis               4th Axis                      Movement                      RThumbY                   ****
- D-PAD Left / Right                6th Axis               7 / 8                         Movement                      DPADX                     ****
- D-PAD Up / Down                   7th Axis               5 / 6                         Movement                      DPADY                     ****
+ Right Thumbstick X                4th Axis               3rd Axis                      Shooting Dir                  RThumbX                   right
+ Right Thumbstick Y                5th Axis               4th Axis                      Shooting Dir                  RThumbY                   up
+ D-PAD Left / Right                6th Axis               7 / 8                         Shooting Dir                  DPADX                     right
+ D-PAD Up / Down                   7th Axis               5 / 6                         Shooting Dir                  DPADY                     up
  Left Trigger                      9th Axis               5th Axis                      Lock Position                 LTrigger                  Z
  Right Trigger                     10th Axis              6th Axis                      Lock Position                 RTrigger                  X
  Left/Right Trigger Combined       3rd Axis               ****                          ****                          ****                      ****
@@ -65,9 +65,19 @@ public class PlayerInput : MonoBehaviour {
         //Picks up the Horizontal and Vertical input from the Left Thumbstick of the XBOX Controller or the Thumstick of the Switch
         //Used for character directional Movement in the Player Controller script
 		Vector2 directionalInput =  new Vector2(Input.GetAxisRaw("LThumbX"), Input.GetAxisRaw("LThumbY"));
-        player.SetDirectionalInput(directionalInput);
+        player.SetDirectionalInput(directionalInput, isFacingRight);
 
-       
+
+        float x = Input.GetAxisRaw("RThumbX");
+        float y = Input.GetAxisRaw("RThumbY");
+        
+        
+
+        Vector2 shootingDirection = new Vector2(x,y);
+        Debug.Log(shootingDirection);
+        player.SetShootingDirectionInput(shootingDirection);
+
+
         //Picks up the A button on the XBOX Controller or B button on the Switch Controller
         //Used for Jumping in the Player Controller Script   
         if (Input.GetButtonDown("BButton"))
@@ -87,9 +97,9 @@ public class PlayerInput : MonoBehaviour {
             Debug.Log("Xbox B pressed!");
         }
 
-        if (Input.GetButtonDown("YButton"))
+        if (Input.GetButton("YButton"))
         {
-
+            player.Shoot();
             //Debug.Log("Xbox X pressed!");
         }
 

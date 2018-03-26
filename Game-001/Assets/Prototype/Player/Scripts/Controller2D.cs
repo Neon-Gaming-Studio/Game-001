@@ -10,13 +10,14 @@ public class Controller2D : RaycastController
     #region VARIABLES
     
     //Maximun Angle the Player can walk up
-    float maxSlopeAngle = 80;
+    float maxSlopeAngle = 80f;
 
     //Component References
     public CollisionInfo collisions;
 
     //Input value
-    [HideInInspector] public Vector2 playerInput;
+    [HideInInspector]
+    public Vector2 playerInput;
 
     #endregion
 
@@ -44,6 +45,7 @@ public class Controller2D : RaycastController
         collisions.Reset();
         collisions.moveAmountOld = moveAmount;
         playerInput = input;
+        
 
         if (moveAmount.y < 0)
         {

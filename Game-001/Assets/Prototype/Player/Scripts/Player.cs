@@ -9,11 +9,12 @@ public class Player : MonoBehaviour {
     #region VARIABLES
 
     [Header("Movement Variables")]
-    public float moveSpeed;
+    public float moveSpeed = 6f;
     float gravity;
     Vector3 velocity;
     float velocityXSmoothing;
     Vector2 directionalInput;
+    bool isFacingRight;
 
     [Header("Jumping Variables")]
     public float maxJumpHeight = 4;
@@ -23,7 +24,16 @@ public class Player : MonoBehaviour {
     float accelerationTimeGrounded = 0.1f;
     float maxJumpVelocity;
     float minJumpVelocity;
-    
+
+    [Header("Shooting Variables")]
+    public Vector2 shootingDirection;
+    public float fireRate;
+    private float fireDelay;
+    GameObject firePoint;
+    GameObject arm;
+    public GameObject projectilePrefab;
+
+
     //Component References 
     Controller2D controller;
     PlayerAnimController animController;
@@ -36,6 +46,18 @@ public class Player : MonoBehaviour {
 
     void Start()
     {
+        firePoint = GameObject.Find("FirePoint");
+        if (!firePoint)
+        {
+            Debug.Log("Did not find Firepoint");
+        }
+
+        //Reference to the arm component of the player 
+        arm = GameObject.Find("Arm");
+        if (!arm)
+        {
+            Debug.Log("Did not find Arm");
+        }
 
         controller = GetComponent<Controller2D>();
 
@@ -57,6 +79,7 @@ public class Player : MonoBehaviour {
         //Calls the Move Method on the Controller2D script to move the Character 
         controller.Move(velocity * Time.deltaTime, directionalInput);
 
+        CalculateShootingDirection();
 
         if (controller.collisions.above || controller.collisions.below)
         {
@@ -108,26 +131,80 @@ public class Player : MonoBehaviour {
 
     #endregion
 
+    #region SHOOT METHODS
+
+    public void Shoot()
+    {
+        Debug.Log("FIRE!");
+        if (Time.time > fireDelay)
+        {
+            fireDelay = Time.time + fireRate;
+            GameObject bullet = Instantiate(projectilePrefab, firePoint.transform.position, firePoint.transform.rotation);
+
+        }
+    }
+
+
+    void CalculateShootingDirection()
+    {
+        if (!isFacingRight)
+        {
+            shootingDirection = -shootingDirection;
+        }
+
+        if (shootingDirection == Vector2.zero)
+        {
+            shootingDirection = new Vector2(1, 0);
+        }
+
+        if (shootingDirection.x == -1)
+        {
+            shootingDirection.x = 0;
+        }
+
+        float shootingAngle = (Mathf.Rad2Deg * (Mathf.Atan2(shootingDirection.y, shootingDirection.x)));
+        arm.transform.rotation = Quaternion.Euler(0, 0, shootingAngle);
+    }
+
+    #endregion
+
     #region UTILITY METHODS
 
     //This takes the Movement input from the PlayerInput script which is then manipulated by the CalculateVelocity method and passed into the Move method
     //on the Controlled2D script.
-    public void SetDirectionalInput(Vector2 input)
+    public void SetDirectionalInput(Vector2 input, bool facingRight)
     {
         directionalInput = input;
+        isFacingRight = facingRight;
+    }
+    
+    
+    
+    //This takes the directional Input from the PlayerInput script
+    public void SetShootingDirectionInput(Vector2 inputShooting)
+    {
+        shootingDirection = inputShooting;
     }
 
+    //Allows the projectile to access the facing direction
+    public bool FacingDir()
+    {
+        return isFacingRight;
+    }
 
     //Called by the Update Method to adjust the velocity of the Player movement
     void CalculateVelocity()
     {
-        //Adds a smooth calculation to the horizontal movement 
+        
         float targetVelocityX = directionalInput.x * moveSpeed;
+        
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
-
-        //Calculates Gravity against the player
         velocity.y += gravity * Time.deltaTime;
+       
+
     }
+
+   
     #endregion
 
 }
