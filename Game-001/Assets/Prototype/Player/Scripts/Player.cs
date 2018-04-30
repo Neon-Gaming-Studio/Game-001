@@ -36,8 +36,7 @@ public class Player : MonoBehaviour {
 
     //Component References 
     Controller2D controller;
-    PlayerAnimController animController;
-
+    
     //public bool enableWallClimb = false;
 
     #endregion
