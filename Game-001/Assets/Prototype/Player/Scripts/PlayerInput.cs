@@ -66,18 +66,14 @@ public class PlayerInput : MonoBehaviour {
         //Used for character directional Movement in the Player Controller script
 		Vector2 directionalInput =  new Vector2(Input.GetAxisRaw("LThumbX"), Input.GetAxisRaw("LThumbY"));
         player.SetDirectionalInput(directionalInput, isFacingRight);
-
-
-        float x = Input.GetAxisRaw("RThumbX");
-        float y = Input.GetAxisRaw("RThumbY");
         
-        
-
-        Vector2 shootingDirection = new Vector2(x,y);
-        Debug.Log(shootingDirection);
+        Vector2 shootingDirection = new Vector2(Input.GetAxisRaw("RThumbX"),Input.GetAxisRaw("RThumbY"));
         player.SetShootingDirectionInput(shootingDirection);
 
-
+        //TODO: Remove Right Trigger after testing
+        //Right Trigger on Xbox controller
+        float rtrigger = Input.GetAxis("RTrigger");
+        
         //Picks up the A button on the XBOX Controller or B button on the Switch Controller
         //Used for Jumping in the Player Controller Script   
         if (Input.GetButtonDown("BButton"))
@@ -94,10 +90,10 @@ public class PlayerInput : MonoBehaviour {
 
         if (Input.GetButtonDown("AButton"))
         {
-            Debug.Log("Xbox B pressed!");
+            //Debug.Log("Xbox B pressed!");
         }
 
-        if (Input.GetButton("YButton"))
+        if (Input.GetButton("YButton") || rtrigger > 0)
         {
             player.Shoot();
             //Debug.Log("Xbox X pressed!");

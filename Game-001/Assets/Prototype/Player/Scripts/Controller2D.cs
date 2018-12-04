@@ -19,6 +19,8 @@ public class Controller2D : RaycastController
     [HideInInspector]
     public Vector2 playerInput;
 
+    private Animator animator;
+
     #endregion
 
 
@@ -26,6 +28,7 @@ public class Controller2D : RaycastController
     {
         base.Start();
         collisions.faceDir = 1;
+        animator = GetComponentInChildren<Animator>();
     }
 
 
@@ -73,6 +76,7 @@ public class Controller2D : RaycastController
 
         //============MOVES THE PLAYER==============//
         transform.Translate(moveAmount);
+        Debug.Log(moveAmount);
         //============MOVES THE PLAYER==============//
     }
 

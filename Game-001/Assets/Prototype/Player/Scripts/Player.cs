@@ -30,7 +30,6 @@ public class Player : MonoBehaviour {
     public float fireRate;
     private float fireDelay;
     GameObject firePoint;
-    GameObject arm;
     public GameObject projectilePrefab;
 
 
@@ -49,13 +48,6 @@ public class Player : MonoBehaviour {
         if (!firePoint)
         {
             Debug.Log("Did not find Firepoint");
-        }
-
-        //Reference to the arm component of the player 
-        arm = GameObject.Find("Arm");
-        if (!arm)
-        {
-            Debug.Log("Did not find Arm");
         }
 
         controller = GetComponent<Controller2D>();
@@ -162,7 +154,7 @@ public class Player : MonoBehaviour {
         }
 
         float shootingAngle = (Mathf.Rad2Deg * (Mathf.Atan2(shootingDirection.y, shootingDirection.x)));
-        arm.transform.rotation = Quaternion.Euler(0, 0, shootingAngle);
+        firePoint.transform.rotation = Quaternion.Euler(0, 0, shootingAngle);
     }
 
     #endregion
