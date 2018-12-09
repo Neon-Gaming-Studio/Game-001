@@ -333,7 +333,7 @@ GameObject:
   m_Layer: 8
   m_Name: FirePoint
   m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -990,7 +990,6 @@ GameObject:
   m_Component:
   - component: {fileID: 617877355}
   - component: {fileID: 617877360}
-  - component: {fileID: 617877359}
   - component: {fileID: 617877358}
   - component: {fileID: 617877357}
   - component: {fileID: 617877356}
@@ -1045,14 +1044,6 @@ AudioListener:
 Behaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 124644890460169380, guid: d7480c8f4e55d634fa558dbfc1228984,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 617877354}
-  m_Enabled: 1
---- !u!92 &617877359
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 92908362485330964, guid: d7480c8f4e55d634fa558dbfc1228984,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 617877354}
@@ -1968,13 +1959,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1057726641}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04fccc41bfd733841a61c5087e381837, type: 3}
+  m_Script: {fileID: 11500000, guid: b3c49a53c8413f14abd92d9a65c72b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  isFacingRight: 0
   maxJumpHeight: 6
   minJumpHeight: 1
   timeToJumpApex: 0.4
+  accelerationTimeAirborne: 0.2
+  accelerationTimeGrounded: 0.1
   shootingDirection: {x: 0, y: 0}
   fireRate: 0.2
   projectilePrefab: {fileID: 1046085552704990, guid: 902c9dc3819d45541b2dd5f6e1335246,

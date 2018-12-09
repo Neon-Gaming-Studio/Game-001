@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+#region CONTROLLER VARIABLES TABLES
 /*
  ACTION MAPPINGS CREATED IN UNITY - Check EDIT > PROJECT SETTINGS > INPUT
  
@@ -39,33 +40,43 @@ AXISES
 
  */
 
-
+#endregion 
 
 //This Script controls the Player Input from the Action Mapping Above
 
 //Requires a Player Script to be attached to the same Object. Adds a Player Script if there is not one.
 //Also ensure that it cannot be removed if there is still a player Script attach to the same object.
+
 [RequireComponent(typeof(Player))]
 
 public class PlayerInput : MonoBehaviour {
+     
+    #region VARIABLES
 
     Player player;
     //Animator animator;    - This will be used for animation
     bool isFacingRight = true;
+    Controller controller;
 
+    #endregion
+    
+    #region START
     //Get a reference to the Player Script
     void Start () {
         player = GetComponent<Player>();
-        //animator = GetComponent<Animator>();     - This will be used for animation
+        controller = GetComponent<Controller>();
     }
+    #endregion
 
+    #region UPDATE
 
     void Update () {
 
+        #region AXISES
         //Picks up the Horizontal and Vertical input from the Left Thumbstick of the XBOX Controller or the Thumstick of the Switch
         //Used for character directional Movement in the Player Controller script
-		Vector2 directionalInput =  new Vector2(Input.GetAxisRaw("LThumbX"), Input.GetAxisRaw("LThumbY"));
-        player.SetDirectionalInput(directionalInput, isFacingRight);
+        Vector2 directionalInput =  new Vector2(Input.GetAxisRaw("LThumbX"), Input.GetAxisRaw("LThumbY"));
+        controller.SetDirectionalInput(directionalInput, isFacingRight);
         
         Vector2 shootingDirection = new Vector2(Input.GetAxisRaw("RThumbX"),Input.GetAxisRaw("RThumbY"));
         player.SetShootingDirectionInput(shootingDirection);
@@ -73,55 +84,61 @@ public class PlayerInput : MonoBehaviour {
         //TODO: Remove Right Trigger after testing
         //Right Trigger on Xbox controller
         float rtrigger = Input.GetAxis("RTrigger");
-        
+        #endregion
+
+        #region BUTTONS
         //Picks up the A button on the XBOX Controller or B button on the Switch Controller
         //Used for Jumping in the Player Controller Script   
-        if (Input.GetButtonDown("BButton"))
-        { //On Press Down
-            player.OnJumpInputDown();
+
+        if (Input.GetButtonDown("BButton")) { //On Press Down
+            controller.OnJumpInputDown();
             //Debug.Log("Xbox A pressed!");
         }
 
-        if (Input.GetButtonUp("BButton"))
-        { //On Lift Up
-            player.OnJumpInputUp();
+        if (Input.GetButtonUp("BButton")) { //On Lift Up
+            controller.OnJumpInputUp();
             //Debug.Log("Xbox A released!");
         }
 
-        if (Input.GetButtonDown("AButton"))
-        {
+        if (Input.GetButtonDown("AButton")) {
             //Debug.Log("Xbox B pressed!");
         }
 
-        if (Input.GetButton("YButton") || rtrigger > 0)
-        {
+        if (Input.GetButton("YButton") || rtrigger > 0) {
             player.Shoot();
             //Debug.Log("Xbox X pressed!");
         }
 
-        if (Input.GetButtonDown("XButton"))
-        {
+        if (Input.GetButtonDown("XButton")) {
             //Debug.Log("Xbox Y pressed!");
         }
 
+        #endregion
 
-        if (directionalInput.x > 0 && !isFacingRight)
-        {
+        #region CHANGE DIRECTIONAL
+
+        if (directionalInput.x > 0 && !isFacingRight) {
             Flip();
         }
-        else if (directionalInput.x < 0 && isFacingRight)
-        {
+        else if (directionalInput.x < 0 && isFacingRight) {
             Flip();
         }
+
+        #endregion
 
     }
-    void Flip()
-    {
+
+    #endregion
+
+    #region UTILITY METHODS
+
+    void Flip() {
         isFacingRight = !isFacingRight;
         Vector3 theScale = transform.localScale;
 
         theScale.x *= -1;
         transform.localScale = theScale;
-
     }
+
+    #endregion
 }
