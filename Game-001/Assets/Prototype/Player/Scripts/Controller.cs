@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 //The Controller Script derives from the RaycastController 
-//It used used for all the PLAYER  and calculate the COLLISIONS
+//It used used for all the PLAYER and calculate the COLLISIONS
 
 public class Controller : RaycastController
 {
@@ -41,6 +41,7 @@ public class Controller : RaycastController
 
         //Used for Jumping
         CalculateJumping();
+
     }
 
     #endregion

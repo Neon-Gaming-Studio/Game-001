@@ -24,13 +24,13 @@ public class Player : MonoBehaviour {
     public float accelerationTimeAirborne = 0.2f;
     [HideInInspector]
     public float accelerationTimeGrounded = 0.1f;
-    
 
     [Header("Shooting Variables")]
     public Vector2 shootingDirection;
     public float fireRate;
     private float fireDelay;
-    GameObject firePoint;
+    public GameObject firePoint;
+    public GameObject rotator;
     public GameObject projectilePrefab;
 
     //public bool enableWallClimb = false;
@@ -42,10 +42,7 @@ public class Player : MonoBehaviour {
     void Start()
     {
         firePoint = GameObject.Find("FirePoint");
-        if (!firePoint)
-        {
-            Debug.Log("Did not find Firepoint");
-        }
+        rotator = GameObject.Find("Rotator");
     }
 
     #endregion
@@ -54,14 +51,7 @@ public class Player : MonoBehaviour {
 
     void Update()
     {
-        
-
-        
-
         CalculateShootingDirection();
-
-        
-      
     }
 
     #endregion
@@ -98,7 +88,7 @@ public class Player : MonoBehaviour {
         }
 
         float shootingAngle = (Mathf.Rad2Deg * (Mathf.Atan2(shootingDirection.y, shootingDirection.x)));
-        firePoint.transform.rotation = Quaternion.Euler(0, 0, shootingAngle);
+        rotator.transform.rotation = Quaternion.Euler(0, 0, shootingAngle);
     }
 
     #endregion
