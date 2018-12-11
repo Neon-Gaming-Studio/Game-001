@@ -40,9 +40,15 @@ public class Projectile : MonoBehaviour
 
     #endregion
 
-    private void OnTriggerEnter2D(Collider2D collision) { 
+    private void OnTriggerEnter2D(Collider2D collision) {
         //TODO Add functionality for collisions
-        Destroy(gameObject);
+        if (collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<Enemy>().DoDamage();
+            Debug.Log("Hit Enemy!");
+            Destroy(gameObject);
+        }
+        
     }
 }
 
