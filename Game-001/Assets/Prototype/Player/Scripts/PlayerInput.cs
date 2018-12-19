@@ -50,10 +50,9 @@ AXISES
 [RequireComponent(typeof(Player))]
 
 public class PlayerInput : MonoBehaviour {
-     
+
     #region VARIABLES
 
-    Player player;
     //Animator animator;    - This will be used for animation
     bool isFacingRight = true;
     Controller controller;
@@ -63,7 +62,6 @@ public class PlayerInput : MonoBehaviour {
     #region START
     //Get a reference to the Player Script
     void Start () {
-        player = GetComponent<Player>();
         controller = GetComponent<Controller>();
     }
     #endregion
@@ -75,18 +73,22 @@ public class PlayerInput : MonoBehaviour {
         #region AXISES
         //Picks up the Horizontal and Vertical input from the Left Thumbstick of the XBOX Controller or the Thumstick of the Switch
         //Used for character directional Movement in the Player Controller script
-        Vector2 directionalInput =  new Vector2(Input.GetAxisRaw("LThumbX"), Input.GetAxisRaw("LThumbY"));
-        controller.SetDirectionalInput(directionalInput, isFacingRight);
-        
-        Vector2 shootingDirection = new Vector2(Input.GetAxisRaw("RThumbX"),Input.GetAxisRaw("RThumbY"));
-        player.SetShootingDirectionInput(shootingDirection);
+        Vector2 moveDirectionalInput =  new Vector2(Input.GetAxisRaw("LThumbX"), Input.GetAxisRaw("LThumbY"));
+        controller.SetMoveDirectionalInput(moveDirectionalInput, isFacingRight);
 
-        //TODO: Remove Right Trigger after testing
+
+        Vector2 shootDirectionalInput = new Vector2(Input.GetAxisRaw("RThumbX"), Input.GetAxisRaw("RThumbY"));
+        shootDirectionalInput = new Vector2(Mathf.RoundToInt(shootDirectionalInput.x), Mathf.RoundToInt(shootDirectionalInput.y));
+        //TODO : Update() - Remove Inverse from Project Input Preferences from RThumbY (suspected faulty game controller used for testing)
+        controller.SetShootingDirectionInput(shootDirectionalInput);
+
+        //TODO : Update() - Remove Right Trigger after testing
         //Right Trigger on Xbox controller
         float rtrigger = Input.GetAxis("RTrigger");
         #endregion
 
         #region BUTTONS
+
         //Picks up the A button on the XBOX Controller or B button on the Switch Controller
         //Used for Jumping in the Player Controller Script   
 
@@ -105,7 +107,7 @@ public class PlayerInput : MonoBehaviour {
         }
 
         if (Input.GetButton("YButton") || rtrigger > 0) {
-            player.Shoot();
+            controller.Shoot();
             //Debug.Log("Xbox X pressed!");
         }
 
@@ -117,10 +119,10 @@ public class PlayerInput : MonoBehaviour {
 
         #region CHANGE DIRECTIONAL
 
-        if (directionalInput.x > 0 && !isFacingRight) {
+        if (moveDirectionalInput.x > 0 && !isFacingRight) {
             Flip();
         }
-        else if (directionalInput.x < 0 && isFacingRight) {
+        else if (moveDirectionalInput.x < 0 && isFacingRight) {
             Flip();
         }
 

@@ -11,8 +11,8 @@ public class Projectile : MonoBehaviour
     GameObject player;
     bool facingDir;
 
-    //TODO Add damage to Weapons
-    float damage = 10f;
+    //TODO : Variables - Add damage to Weapons
+    //float damage = 10f;
 
     #endregion
 
@@ -20,35 +20,38 @@ public class Projectile : MonoBehaviour
 
     void Start() {
         //Gets a reference to the players facing direction
-        player = GameObject.Find("Player");
-        facingDir = player.GetComponent<Player>().FacingDir();
+        facingDir = GameObject.Find("Player").GetComponent<Controller>().FacingDir();
+        if (!facingDir)
+        {
+            speed = -speed;
+        }
+
+        Invoke("DestroyProjectile",2f);
     }
 
     #endregion
 
     #region UPDATE METHOD
 
-    void Update() {
-        //Moves the projectile in the direction the player is facing
-        //Reverses the direction of travel if the player is facing backwards.
-        if (facingDir) {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
-        } else {
-            transform.Translate(Vector2.right * -speed * Time.deltaTime);
-        }
+    void Update() {          
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
 
     #endregion
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        //TODO Add functionality for collisions
+        //TODO : OnTriggerEnter2D - Add functionality for collisions
         if (collision.CompareTag("Enemy"))
         {
             collision.GetComponent<Enemy>().DoDamage();
             Debug.Log("Hit Enemy!");
-            Destroy(gameObject);
+            DestroyProjectile();
         }
-        
+    }
+
+    void DestroyProjectile()
+    {
+        Destroy(gameObject);
     }
 }
 

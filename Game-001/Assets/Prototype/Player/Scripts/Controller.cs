@@ -24,9 +24,20 @@ public class Controller : RaycastController
 
     //Input value
     [HideInInspector]
-    public Vector2 playerInput;
+    public Vector2 moveInput;
+    [HideInInspector]
+    public bool isFacingRight;
 
     private Animator animator;
+
+    [Header("Shooting Variables")]
+    public Vector2 shootInput;
+    float shootingAngle;
+    public float fireRate;
+    private float fireDelay;
+    public GameObject firePoint;
+    public GameObject rotator;
+    public GameObject projectilePrefab;
 
     #endregion
 
@@ -42,6 +53,9 @@ public class Controller : RaycastController
         //Used for Jumping
         CalculateJumping();
 
+        firePoint = GameObject.Find("FirePoint");
+        rotator = GameObject.Find("Rotator");
+
     }
 
     #endregion
@@ -50,8 +64,9 @@ public class Controller : RaycastController
 
     public void Update()
     {
-        Move(playerInput);
+        Move(moveInput);
         SlopeSlideCheck();
+        CalculateShootingDirection();
     }
 
     #endregion
@@ -71,7 +86,7 @@ public class Controller : RaycastController
         UpdateRaycastOrigins(); //Updates the Raycast Origins of the player box collider bounds in the RaycastController Script 
         collisions.Reset();
         collisions.moveAmountOld = moveAmount;
-        playerInput = input;
+        moveInput = input;
         
 
         if (moveAmount.y < 0) {
@@ -107,6 +122,76 @@ public class Controller : RaycastController
 
     #endregion
 
+    #region CHARACTER SHOOTING
+
+    void CalculateShootingDirection()
+    {
+        ShootingMethod();
+    }
+
+    private void ShootingMethod()
+    {
+        //Changes the shooting angle dependent on the way the character is facing this is due to the Flip() function that inverses the scale 
+        //and changes thus the coordinates of the input Vectors
+
+        if (isFacingRight)
+        {
+            //Ensures that the characters shoots the way it is facing when no input is applied
+            if (shootInput == Vector2.zero)
+            {
+                shootingAngle = 0;
+            }
+            else
+            {
+                //Calculates an angle which is used on the weapon Transform so that it rotates
+                shootingAngle = (Mathf.Rad2Deg * (Mathf.Atan2(shootInput.y, shootInput.x)));
+            }
+            //Animates the character so the sprite uses the correct Angled Shooting Animation
+            animator.SetFloat("ShootX", shootInput.x);
+            animator.SetFloat("ShootY", shootInput.y);
+        }
+        else
+        {
+
+            //This branch is used when the character scale is flipped as part of the Flip() function
+
+            Vector2 inverseShoot = shootInput * -1; //Inverses the input to rectify the incerse localscale being applied 
+
+            if (shootInput == Vector2.zero)
+            {
+                shootingAngle = 0;
+            }
+            else
+            {
+                //Creates the inverse angle
+                shootingAngle = (Mathf.Rad2Deg * (Mathf.Atan2(inverseShoot.y, inverseShoot.x)));
+            }
+            animator.SetFloat("ShootX", -shootInput.x);
+            animator.SetFloat("ShootY", shootInput.y);
+        }
+
+
+
+        //TODO : CalculateShootingDirection() - Change the Rotator to the weapon once it gets added
+        //This rotates the tranform of the Weapon
+        rotator.transform.rotation = Quaternion.Euler(0, 0, shootingAngle);
+    }
+
+    public void Shoot()
+    {
+        //TODO : Shoot() - Move Shoot/Fire function onto a weapon
+
+        Debug.Log("FIRE!");
+        if (Time.time > fireDelay)
+        {
+            fireDelay = Time.time + fireRate;
+            Instantiate(projectilePrefab, firePoint.transform.position, firePoint.transform.rotation);
+
+        }
+    }
+
+    #endregion
+
     #region JUMP METHODS
 
     private void CalculateJumping() {
@@ -120,7 +205,7 @@ public class Controller : RaycastController
 
         if (collisions.below) {
             if (collisions.slidingDownMaxSlope) {
-                if (playerInput.x != -Mathf.Sign(collisions.slopeNormal.x)) { 
+                if (moveInput.x != -Mathf.Sign(collisions.slopeNormal.x)) { 
                     // not jumping against max slope
                     velocity.y = maxJumpVelocity * collisions.slopeNormal.y;
                     velocity.x = maxJumpVelocity * collisions.slopeNormal.x;
@@ -219,7 +304,7 @@ public class Controller : RaycastController
                 if (hit.collider.tag == "Through") {
                     if (directionY == 1 ||  hit.distance == 0) { continue; }
                     if (collisions.fallingThroughPlatform) { continue; }
-                    if (playerInput.y == -1) {
+                    if (moveInput.y == -1) {
                         collisions.fallingThroughPlatform = true;
                         Invoke("ResetFallingThroughPlatform",0.5f);
                         continue;
@@ -346,9 +431,14 @@ public class Controller : RaycastController
 
     //This takes the Movement input from the PlayerInput script which is then manipulated by the CalculateVelocity method and passed into the Move method
     //on the Controlled2D script.
-    public void SetDirectionalInput(Vector2 _input, bool facingRight) {
-        playerInput = _input;
-        player.isFacingRight = facingRight;
+    public void SetMoveDirectionalInput(Vector2 _inputMove, bool facingRight) {
+        moveInput = _inputMove;
+        isFacingRight = facingRight;
+    }
+
+    //This takes the directional Input from the PlayerInput script
+    public void SetShootingDirectionInput(Vector2 _inputShooting) {
+        shootInput = _inputShooting;
     }
 
     //Checks whether the player is on a slope
@@ -361,6 +451,14 @@ public class Controller : RaycastController
                 velocity.y = 0;
             }
         }
+    }
+
+    
+
+    //Allows the projectile to access the facing direction
+    public bool FacingDir()
+    {
+        return isFacingRight;
     }
 
     #endregion
