@@ -98,10 +98,20 @@ public class Controller : RaycastController
         }
 
         //Animator Controller
-        if (moveAmount.x > 0.1f || moveAmount.x < -0.1f) {
+        if (moveAmount.x > 0.01f)
+        {
+            Debug.Log("Moving Right");
             animator.SetInteger("State", 1);
         }
-        else if (moveAmount.x <= 0.1f && moveAmount.x >= -0.1f) {
+
+        if (moveAmount.x < -0.01f)
+        {
+            Debug.Log("Moving Left");
+            animator.SetInteger("State", 1);
+        }
+
+
+        if (moveAmount.x <= 0.01f && moveAmount.x >= -0.01f) {
             animator.SetInteger("State", 0);
         }
 
@@ -126,51 +136,51 @@ public class Controller : RaycastController
 
     void CalculateShootingDirection()
     {
-        ShootingMethod();
-    }
+        //TODO : CalculateShootingDirection() - Optimise this as it is constantly run from Update() 
 
-    private void ShootingMethod()
-    {
         //Changes the shooting angle dependent on the way the character is facing this is due to the Flip() function that inverses the scale 
         //and changes thus the coordinates of the input Vectors
 
         if (isFacingRight)
         {
+            //Prevents the player from firing backwards
+            if (shootInput.x == -1) {
+                shootInput.x = 0;
+            }
+
             //Ensures that the characters shoots the way it is facing when no input is applied
-            if (shootInput == Vector2.zero)
-            {
+            if (shootInput == Vector2.zero) {
                 shootingAngle = 0;
             }
-            else
-            {
+            else {
                 //Calculates an angle which is used on the weapon Transform so that it rotates
                 shootingAngle = (Mathf.Rad2Deg * (Mathf.Atan2(shootInput.y, shootInput.x)));
             }
             //Animates the character so the sprite uses the correct Angled Shooting Animation
-            animator.SetFloat("ShootX", shootInput.x);
-            animator.SetFloat("ShootY", shootInput.y);
+            animator.SetInteger("ShootX", (int)shootInput.x);
+            animator.SetInteger("ShootY", (int)shootInput.y);
         }
-        else
-        {
+        else {
+            //Prevents the player from firing backwards
+            if (shootInput.x == 1) {
+                shootInput.x = 0;
+            }
 
             //This branch is used when the character scale is flipped as part of the Flip() function
 
             Vector2 inverseShoot = shootInput * -1; //Inverses the input to rectify the incerse localscale being applied 
 
-            if (shootInput == Vector2.zero)
-            {
+            //Ensures that the characters shoots the way it is facing when no input is applied
+            if (shootInput == Vector2.zero) {
                 shootingAngle = 0;
             }
-            else
-            {
+            else {
                 //Creates the inverse angle
                 shootingAngle = (Mathf.Rad2Deg * (Mathf.Atan2(inverseShoot.y, inverseShoot.x)));
             }
-            animator.SetFloat("ShootX", -shootInput.x);
-            animator.SetFloat("ShootY", shootInput.y);
+            animator.SetInteger("ShootX", -(int)shootInput.x);
+            animator.SetInteger("ShootY", (int)shootInput.y);
         }
-
-
 
         //TODO : CalculateShootingDirection() - Change the Rotator to the weapon once it gets added
         //This rotates the tranform of the Weapon
